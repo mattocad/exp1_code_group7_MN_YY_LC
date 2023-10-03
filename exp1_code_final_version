@@ -1,0 +1,55 @@
+#include <Servo.h>  // Library for Servo Motor 
+int potpin = 0;     // initialize analog pin 0, connected with LDR sensor 1
+int potpin2 = 1;    // initialize analog pin 1, connected with LDR sensor 2
+int potpin3 = 2;    // initialize analog pin 2, connected with LDR sensor 3
+
+int val = 0;  // initialize variable val/val2/val3 representing the stimulus from the light sensor
+int val2 = 0;
+int val3 = 0;
+
+Servo Servo1;  // servo name - each servo corresponds to a branch of the tree.
+Servo Servo2;
+Servo Servo3;
+
+void setup() {
+  Serial.begin(9600);  // baud rate at “9600”
+  Servo1.attach(5);    // digital pin 5; servo 1 pin
+  Servo1.write(0);     // servo 1 start position
+  
+  Servo2.attach(3);  // digital pin 3; servo 2 pin
+  Servo2.write(0);   // servo 2 start position
+  
+  Servo3.attach(2);  // digital pin 2; servo 3 pin
+  Servo3.write(0);   // servo 3 start position
+}
+
+/* The loop() function controls the movement of the branch in response to stimuli */
+
+void loop() {
+  val = analogRead(potpin);  // read the analog value of the sensor and assign it to val
+  Serial.println(val);       // display the value of val
+  delay(10);                 // wait for 0.01
+  if (val > 699) {
+    Servo1.write(180);
+  } else {
+    Servo1.write(0);
+  }
+
+  val2 = analogRead(potpin2);  // read the analog value of the sensor and assign it to val2
+  Serial.println(val2);        // display the value of val2
+  delay(10);                   // wait for 0.01
+  if (val2 > 700) {
+    Servo2.write(180);
+  } else {
+    Servo2.write(0);
+  }
+
+  val3 = analogRead(potpin3);  // read the analog value of the sensor and assign it to val3
+  Serial.println(val3);       // display the value of val3
+  delay(10);                  // wait for 0.01
+  if (val3 > 700) {
+    Servo3.write(180);
+  } else {
+    Servo3.write(0);
+  }
+}
